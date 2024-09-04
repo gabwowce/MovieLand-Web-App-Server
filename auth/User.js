@@ -1,7 +1,7 @@
 //npm install sequelize mysql2 bcrypt
 const { DataTypes } = require('sequelize');
 const bcrypt = require('bcrypt');
-const sequelize = require('./db');
+const sequelize = require('../db');
 
 const User = sequelize.define('User',{
   id:{
@@ -22,7 +22,7 @@ const User = sequelize.define('User',{
       isEmail: true
     }
   },
-  password_hash{
+  password_hash:{
     type: DataTypes.STRING,
     allowNull: false
   },

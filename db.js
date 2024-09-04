@@ -1,18 +1,17 @@
-const mysql = require('mysql2');
+const { Sequelize } = require('sequelize');
 
-const connection = mysql.createConnection({
-  host: 'localhost', 
-  user: 'root',      
-  password: '12301', 
-  database: 'movielandb' 
+// Sukurkite Sequelize instanciją
+const sequelize = new Sequelize('movielandb', 'root', '12301', {
+  host: 'localhost',
+  dialect: 'mysql'
 });
 
-connection.connect((err) => {
-  if (err) {
-    console.error('Error connecting to the database:', err);
-    return;
-  }
-  console.log('Connected to the database.');
-});
+sequelize.authenticate()
+  .then(() => {
+    console.log('Connection to the database has been established successfully.');
+  })
+  .catch(err => {
+    console.error('Unable to connect to the database:', err);
+  });
 
-module.exports = connection;
+module.exports = sequelize;
