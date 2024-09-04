@@ -5,6 +5,7 @@ const getMovies = require('./getMovies');
 const getMoviesByYear = require('./getMoviesByYear');
 const getBestMoviesByYearAndCategory = require('./getMoviesByYearAndCategory')
 const authRoutes = require('./routes/authRoutes');
+const protectedRoutes = require('./protectedRoutes');
 
 
 const app = express();
@@ -23,6 +24,7 @@ app.use(cors());
 // });
 
 app.use('/auth', authRoutes);
+app.use('/api', protectedRoutes);
 
 app.get('/movies', (req, res) => {
     getMovies((err, movies) => {
