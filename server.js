@@ -4,15 +4,17 @@ const fetchMovies = require('./fetchMovies');
 const getMovies = require('./getMovies');
 const getMoviesByYear = require('./getMoviesByYear');
 const getBestMoviesByYearAndCategory = require('./getMoviesByYearAndCategory')
-const authRoutes = require('./routes/authRoutes');
+const authRoutes = require('./auth/authRoutes');
+const User = require('./auth/User');
 const protectedRoutes = require('./protectedRoutes');
+const authenticateToken = require('./auth/authMiddleware')
 
 
 const app = express();
 const PORT = process.env.PORT || 3002;
 
 app.use(cors());
-
+app.use(express.json());
 // app.get('/fetch-movies', (req, res) => {
 //   fetchMovies();
 //   res.send('Fetching movies...');
@@ -55,6 +57,18 @@ app.get('/movies', (req, res) => {
         }
         res.json(movies);
     });
+});
+
+// Endpointas, kuris grąžina vartotojo informaciją
+app.get('/api/current-user', authenticateToken, async (req, res) => {
+  try {
+    const user = await User.findByPk(req.user.id); // Gauti vartotoją pagal ID iš JWT
+    if (!user) return res.sendStatus(404); // Jei vartotojas nerastas
+
+    res.json({ user: { id: user.id, username: user.username, email: user.email } });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
 });
 
 
