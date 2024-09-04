@@ -42,7 +42,9 @@ exports.login = async (req, res) => {
         }
 
         // Sukuria JWT žetoną
-        const token = jwt.sign({ id: user.id }, 'your_jwt_secret', { expiresIn: '1h' });
+        const jwtSecret = process.env.JWT_SECRET;
+        const token = jwt.sign({ id: user.id }, jwtSecret, { expiresIn: '1h' });
+
 
         // Grąžina žetoną vartotojui
         res.cookie('token', token, { httpOnly: true });
