@@ -4,6 +4,8 @@ const fetchMovies = require('./fetchMovies');
 const getMovies = require('./getMovies');
 const getMoviesByYear = require('./getMoviesByYear');
 const getBestMoviesByYearAndCategory = require('./getMoviesByYearAndCategory')
+const authRoutes = require('./routes/authRoutes');
+
 
 const app = express();
 const PORT = process.env.PORT || 3002;
