@@ -53,3 +53,9 @@ exports.login = async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 };
+
+// Logout funkcija
+exports.logout = (req, res) => {
+    res.clearCookie('token'); // Pašalina cookie
+    res.status(200).json({ message: 'Logged out successfully' });
+};
