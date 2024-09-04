@@ -20,7 +20,7 @@ app.use(cors());
 //   process.exit(); 
 // });
 
-
+app.use('/auth', authRoutes);
 
 app.get('/movies', (req, res) => {
     getMovies((err, movies) => {
