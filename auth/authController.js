@@ -47,7 +47,7 @@ exports.login = async (req, res) => {
 
 
         // Grąžina žetoną vartotojui
-        res.cookie('token', token, { httpOnly: true });
+        res.cookie('token', token, { httpOnly: true, secure: true, sameSite: 'Strict' });
         res.status(200).json({ message: 'Logged in successfully' });
     } catch (error) {
         res.status(500).json({ error: error.message });
