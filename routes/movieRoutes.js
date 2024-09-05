@@ -12,7 +12,7 @@ router.get('/', async (req,res)=>{
 })
 
 // to get movies by year/category
-router.get('/movies/filter' async(req,res)=>{
+router.get('/filter' async(req,res)=>{
   const {year, category} = req.query;
 
   const whereClause = {};
