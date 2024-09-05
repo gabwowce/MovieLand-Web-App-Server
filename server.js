@@ -17,9 +17,12 @@ app.use('/auth', authRoutes);
 app.use('/api', protectedRoutes);
 app.use('/movies', movieRoutes);
 
+app.get('/api/status', (req, res) => {
+  res.status(200).json({ status: 'ok' });
+});
 
   
-  app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-  });
-  
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
+
